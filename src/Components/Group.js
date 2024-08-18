@@ -28,7 +28,7 @@ function Group() {
       params: { userId: userData.user._id }
     }).then((response) => {
       // console.log("this is the response",response.data)
-       setGroup(Array.isArray(response.data) ? response.data : [response.data]);
+      setGroup(Array.isArray(response.data) ? response.data : [response.data]);
     })
       .catch((err) => {
         console.log(err)
@@ -73,14 +73,14 @@ function Group() {
 
   useEffect(() => {
     const fetchLastMessages = async () => {
-      const messagesPromises = group.map((grp) => {
+      const messagesPromises = group.length>0 && group.map((grp) => {
         return fetchLastMessage(grp._id);
       });
   
       const messages = await Promise.all(messagesPromises);
   
       const messagesMap = {};
-      group.forEach((grp, index) => {
+      group.length>0 && group.forEach((grp, index) => {
         messagesMap[grp._id] = messages[index];
       });
   
@@ -105,7 +105,7 @@ function Group() {
       <div className={"Sb-Conversation" + (lightTheme ? "" : " dark")}>
 
         {
-          group && Array.isArray(group) && group.map((group, index) => (
+         group && group.length>0 && group.map((group, index) => (
           <div key={index} className={"Conversation-Container" + (lightTheme ? "" : " dark")}
             onClick={async () => {
               const groupId = group._id;
