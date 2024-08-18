@@ -1,0 +1,2 @@
+  setAllMessages([...allMessages, data]);
+            setMessageContent("");

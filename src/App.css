@@ -1,0 +1,20 @@
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+
+.App{
+  background-image: url('./Components/Welcome.jpg');
+  background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+background-color: #dddedd;
+min-height: 98.5vh;
+min-width:98.5vw;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
