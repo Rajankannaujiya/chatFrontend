@@ -7,7 +7,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { myContext } from "./mainContainer";
 import { useSelector, useDispatch } from "react-redux";
 import { refreshSidebarFun } from "../Features/refreshSidebar.js"
-
+import { BACKEND_URL } from './config.js';
 
 function Users() {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ function Users() {
     const fetchData = async () => {
       try {
         // Make the GET request with Axios, passing the request body
-        const response = await Axios.get("/allUser", {
+        const response = await Axios.get(`${BACKEND_URL}/chats/allUser`, {
           params: { userId: userData.user._id }
         });
         setUsers(response.data);
@@ -78,7 +78,7 @@ function Users() {
                   try {
 
                     console.log("chat id is", chatId);
-                    const response = await Axios.post(`/createOrRetrieveChat/${recieverId}?userId=${userData.user._id}`);
+                    const response = await Axios.post(`${BACKEND_URL}/chats/createOrRetrieveChat/${recieverId}?userId=${userData.user._id}`);
                     console.log(response.data)
                     
                     dispatch(refreshSidebarFun());

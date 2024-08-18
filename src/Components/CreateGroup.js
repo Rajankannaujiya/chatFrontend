@@ -3,6 +3,7 @@ import { myContext } from "./mainContainer";
 import { useSelector} from "react-redux";
 import Axios from "axios"
 import { useNavigate } from 'react-router-dom';
+import {BACKEND_URL} from './config.js'
 
 
 function CreateGroup() {
@@ -59,7 +60,7 @@ function CreateGroup() {
     console.log("Input IDs:", input);
   
     try {
-      const response = await Axios.post(`/createGroup?userId=${userData.user._id}`, {
+      const response = await Axios.post(`${BACKEND_URL}/chats/createGroup?userId=${userData.user._id}`, {
         name,
         input
       });
@@ -90,7 +91,7 @@ function CreateGroup() {
     const fetchData = async () => {
       try {
         // Make the GET request with Axios, passing the request body
-        const response = await Axios.get("/allUser", {
+        const response = await Axios.get(`${BACKEND_URL}/chats/allUser`, {
           params: { userId: userData.user._id }
         });
         console.log("Data refresh in sidebar ", response.data);

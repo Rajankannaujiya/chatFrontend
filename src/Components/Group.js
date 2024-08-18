@@ -5,6 +5,7 @@ import Axios from 'axios';
 import { refreshSidebarFun } from "../Features/refreshSidebar.js"
 import { myContext } from "./mainContainer";
 import { useSelector, useDispatch } from "react-redux";
+import { BACKEND_URL } from './config.js';
 
 function Group() {
 
@@ -40,7 +41,7 @@ function Group() {
 
   const fetchLastMessage = async (groupId) => {
     try {
-      const response = await Axios.get(`/groupMessages/${groupId}?userId=${userData.user._id}`);
+      const response = await Axios.get(`${BACKEND_URL}/chats/groupMessages/${groupId}?userId=${userData.user._id}`);
       const messages = response.data
 
       if (Array.isArray(messages) && messages.length > 0) {
@@ -110,7 +111,7 @@ function Group() {
               const groupId = group._id;
 
               try {
-                const response = await Axios.post(`/createGroupChat/${groupId}?userId=${userData.user._id}`);
+                const response = await Axios.post(`${BACKEND_URL}/chats/createGroupChat/${groupId}?userId=${userData.user._id}`);
 
                 dispatch(refreshSidebarFun());
                 

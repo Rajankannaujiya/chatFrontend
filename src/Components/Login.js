@@ -42,7 +42,7 @@ function Login() {
                     "Content-type": "application/json",
                 }
             }
-            await Axios.post(`${BACKEND_URL}/login`, user,config).then((response)=>{
+            await Axios.post(`${BACKEND_URL}/users/login`, user,config).then((response)=>{
                 // console.log("Login:",response.data);
                 setIslogin({msg:"success", key:Math.random()})
                 setLoading(false);

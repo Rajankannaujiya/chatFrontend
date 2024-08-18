@@ -13,6 +13,7 @@ import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { myContext } from "./mainContainer";
 import { toggleTheme } from "../Features/themeSlice";
+import {BACKEND_URL} from './config.js'
 
 
 
@@ -44,7 +45,7 @@ function Sidebar() {
     const fetchChats = async () => {
       // setLoading(true);
       try {
-        const response = await Axios.get("http://localhost:5000/fetchChats", {
+        const response = await Axios.get(`${BACKEND_URL}/chats/fetchChats`, {
           params: { userId: userData.user._id }
         });
         setConversation(response.data.chats);

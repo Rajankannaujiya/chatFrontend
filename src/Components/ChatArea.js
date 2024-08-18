@@ -7,6 +7,7 @@ import { myContext } from "./mainContainer";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
+import { BACKEND_URL } from "./config";
 const ENDPOINT = "https://chat-backend-plum-alpha.vercel.app";
 var socket;
 
@@ -39,7 +40,7 @@ function ChatArea() {
         const fetchData = async () => {
             try {
                 // Make the GET request with Axios, passing the request body
-                const response = await Axios.get("/chats/allUser", {
+                const response = await Axios.get(`${BACKEND_URL}/chats/allUser`, {
                     params: { userId: userData.user._id }
                 });
                 setUsers(response.data);
@@ -57,7 +58,7 @@ function ChatArea() {
         const fetchChats = async () => {
             // setLoading(true);
             try {
-                const response = await Axios.get("/chats/fetchChats", {
+                const response = await Axios.get(`${BACKEND_URL}/chats/fetchChats`, {
                     params: { userId: userData.user._id }
                 });
                 setChat(response.data.chats);
@@ -72,7 +73,7 @@ function ChatArea() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await Axios.get(`/chats/messages/${chatId}?userId=${userData.user._id}`);
+                const response = await Axios.get(`${BACKEND_URL}/chats/messages/${chatId}?userId=${userData.user._id}`);
                 setAllMessages(response.data.messages);
                 socket.emit("join chat", chatId)
                 setAllMessagesCopy(allMessages)
@@ -150,7 +151,7 @@ function ChatArea() {
                 receiver = receiverDetail ? receiverDetail._id : null;
             }
 
-            const { data } = await Axios.post(`/chats/messages?userId=${userData.user._id}`, {
+            const { data } = await Axios.post(`${BACKEND_URL}/chats/messages?userId=${userData.user._id}`, {
                 reciever: receiver,
                 content: messageContent,
                 chatId: chatId,
@@ -172,7 +173,7 @@ function ChatArea() {
     const handleDelete = async (event) => {
 
         try {
-            const response = await Axios.delete(`/chats/deleteMessages/${chatId}?userId=${userData.user._id}`);
+            const response = await Axios.delete(`${BACKEND_URL}/chats/deleteMessages/${chatId}?userId=${userData.user._id}`);
 
             setAllMessages(response.data.chat.messages);
 
