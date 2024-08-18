@@ -39,7 +39,7 @@ function ChatArea() {
         const fetchData = async () => {
             try {
                 // Make the GET request with Axios, passing the request body
-                const response = await Axios.get("/allUser", {
+                const response = await Axios.get("/chats/allUser", {
                     params: { userId: userData.user._id }
                 });
                 setUsers(response.data);
@@ -57,7 +57,7 @@ function ChatArea() {
         const fetchChats = async () => {
             // setLoading(true);
             try {
-                const response = await Axios.get("/fetchChats", {
+                const response = await Axios.get("/chats/fetchChats", {
                     params: { userId: userData.user._id }
                 });
                 setChat(response.data.chats);
@@ -72,7 +72,7 @@ function ChatArea() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await Axios.get(`/messages/${chatId}?userId=${userData.user._id}`);
+                const response = await Axios.get(`/chats/messages/${chatId}?userId=${userData.user._id}`);
                 setAllMessages(response.data.messages);
                 socket.emit("join chat", chatId)
                 setAllMessagesCopy(allMessages)
@@ -103,6 +103,7 @@ function ChatArea() {
                 console.log(err.message);
     
                 // some additional description, for exle the status code of the initial HTTP response
+
                 console.log(err.description);
     
                 console.log(err.context);
@@ -149,7 +150,7 @@ function ChatArea() {
                 receiver = receiverDetail ? receiverDetail._id : null;
             }
 
-            const { data } = await Axios.post(`/messages?userId=${userData.user._id}`, {
+            const { data } = await Axios.post(`/chats/messages?userId=${userData.user._id}`, {
                 reciever: receiver,
                 content: messageContent,
                 chatId: chatId,
@@ -171,7 +172,7 @@ function ChatArea() {
     const handleDelete = async (event) => {
 
         try {
-            const response = await Axios.delete(`/deleteMessages/${chatId}?userId=${userData.user._id}`);
+            const response = await Axios.delete(`/chats/deleteMessages/${chatId}?userId=${userData.user._id}`);
 
             setAllMessages(response.data.chat.messages);
 

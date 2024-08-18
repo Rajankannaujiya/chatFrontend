@@ -7,6 +7,7 @@ import { Backdrop, CircularProgress } from "@mui/material";
 // or
 // import { Backdrop } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { BACKEND_URL } from './config.js';
 
 
 
@@ -41,7 +42,7 @@ function Login() {
                     "Content-type": "application/json",
                 }
             }
-            await Axios.post('/login', user,config).then((response)=>{
+            await Axios.post(`${BACKEND_URL}/login`, user,config).then((response)=>{
                 // console.log("Login:",response.data);
                 setIslogin({msg:"success", key:Math.random()})
                 setLoading(false);

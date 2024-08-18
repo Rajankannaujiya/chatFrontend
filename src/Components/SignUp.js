@@ -4,6 +4,7 @@ import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Backdrop, CircularProgress } from "@mui/material";
 import Toaster from './Toaster';
+import { BACKEND_URL } from './config.js';
 
 function SignUp() {
     const navigate = useNavigate();
@@ -35,7 +36,7 @@ function SignUp() {
         const { username, email, password, confirmPassword } = users;
     
         try {
-            await Axios.post('/register', {
+            await Axios.post(`${BACKEND_URL}/users/register`, {
                 username,
                 email,
                 password,
