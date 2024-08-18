@@ -127,7 +127,7 @@ function Group() {
             }}>
             <div>
               <p className="con-icon">
-                {group?.name[0]}
+                {group.length> 0 && group?.name[0]}
               </p>
             </div>
             <div>
