@@ -105,7 +105,7 @@ function Group() {
       <div className={"Sb-Conversation" + (lightTheme ? "" : " dark")}>
 
         {
-          group.map((group, index) => (
+          group && Array.isArray(group) && group.map((group, index) => (
           <div key={index} className={"Conversation-Container" + (lightTheme ? "" : " dark")}
             onClick={async () => {
               const groupId = group._id;
