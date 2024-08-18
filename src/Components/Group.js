@@ -28,7 +28,7 @@ function Group() {
       params: { userId: userData.user._id }
     }).then((response) => {
       // console.log("this is the response",response.data)
-      setGroup(response.data)
+       setGroup(Array.isArray(response.data) ? response.data : [response.data]);
     })
       .catch((err) => {
         console.log(err)
